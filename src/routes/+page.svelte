@@ -3,20 +3,11 @@
 	import intro02 from '#lib/assets/intro_02_dk.jpg';
 	import intro03 from '#lib/assets/intro_03_dk.jpg';
 	import intro04 from '#lib/assets/intro_04_dk.jpg';
-	import fig01 from '#lib/assets/fig_01_dk.jpg';
-	import fig02 from '#lib/assets/fig_02_dk.jpg';
-	import fig03 from '#lib/assets/fig_03_dk.jpg';
-	import fig04 from '#lib/assets/fig_04_dk.jpg';
-	import fig05 from '#lib/assets/fig_05_dk.jpg';
-
-	// Collage figures: position/size in viewport units, `at` = collage progress (0–1) when it fades in.
-	const figs = [
-		{ src: fig01, alt: '', top: 8, left: 6, width: 26, at: 0.23 },
-		{ src: fig02, alt: '', top: 14, left: 38, width: 22, at: 0.12 },
-		{ src: fig03, alt: '', top: 6, left: 66, width: 28, at: 0.01 },
-		{ src: fig04, alt: '', top: 52, left: 14, width: 30, at: 0.36 },
-		{ src: fig05, alt: '', top: 50, left: 56, width: 26, at: 0.01 }
-	];
+	import fig01table from '#lib/assets/fig_01_dk.jpg';
+	import fig02sofa from '#lib/assets/fig_02_dk.jpg';
+	import fig03chair from '#lib/assets/fig_03_dk.jpg';
+	import fig04girl from '#lib/assets/fig_04_dk.jpg';
+	import fig05shirt from '#lib/assets/fig_05_dk.jpg';;
 
 	/** @type {HTMLElement} */ let pinnedSection;
 	/** @type {HTMLElement} */ let textSection;
@@ -68,19 +59,6 @@
 	let splitOpacity = $derived(1 - Math.min(1, Math.max(0, (holdProgress - 0.5) * 2)));
 
 </script>
-
-<div class="collage" aria-hidden={collageProgress === 0}>
-	{#each figs as fig}
-		<img
-			src={fig.src}
-			alt={fig.alt}
-			style:top="{fig.top}vh"
-			style:left="{fig.left}vw"
-			style:width="{fig.width}vw"
-			class:hidden={collageProgress < fig.at}
-		/>
-	{/each}
-</div>
 
 <div class="intro_wr" style:opacity={splitOpacity} style:visibility={splitOpacity === 0 ? 'hidden' : 'visible'}>
 	<div class="panel">
@@ -134,6 +112,15 @@
 	<section class="collage_section" bind:this={collageSection}></section>
 </main>
 
+<div class="collage_dk" aria-hidden={collageProgress === 0}>
+<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.01}>
+<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.40}/>
+<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.15}/>
+<div class="fig_spacer"></div>
+<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.15}/>
+<img src={fig05shirt} class="fig5" alt='' class:hidden={collageProgress < 0.01}/>
+</div>
+
 <style>
 	.intro_wr {
 		width: 100%;
@@ -156,17 +143,6 @@
 			object-fit: cover;
 			object-position: bottom;
 			transition: opacity 0.8s ease;
-		}
-	}
-
-	.collage {
-		position: fixed;
-		inset: 0;
-		pointer-events: none;
-		& img {
-			position: absolute;
-			height: auto;
-			transition: opacity 0.5s ease;
 		}
 	}
 
@@ -259,5 +235,31 @@
             font-size: 18px;
             font-family: "CheltenhamBold", serif;
         }
+		.collage_dk {
+			height: 100dvh;
+			width: calc((100dvh * 2 / 3) + (100dvh / 6) + 10px);
+			left: 50%;
+			display: flex;
+			flex-wrap: wrap;
+			transform: translateX(-50%);
+			top: 0px;
+			position: fixed;
+			/* inset: 0; */
+			pointer-events: none;
+			& img {
+				transition: opacity 0.5s ease;
+				display: block;
+			}
+		}
+		.fig1, .fig2, .fig3, .fig5 {
+			height: 25dvh
+		}
+		.fig4{
+			height: 75dvh;
+		}
+		.fig_spacer {
+			height: 25dvh;
+			width: calc(25dvh * 2 / 3);
+		}
 	}
 </style>
