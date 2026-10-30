@@ -93,7 +93,7 @@
 	<section class="scroll_section" bind:this={textSection}>
 		<div class="text_block">
             <p class="title_sm">OPINION</p>
-            <p class="title">TO<br/>FALL<br/>IN<br/>LOVE<br/>WITH<br/>THE<br/>WORLD</p>
+            <p class="title">TO<br/>FALL<br/>IN LOVE<br/>WITH<br/>THE<br/>WORLD</p>
             <p class="poem">
                 A late summer meditation<br/>
                 on time, loss, and solace in<br/>
@@ -112,13 +112,21 @@
 	<section class="collage_section" bind:this={collageSection}></section>
 </main>
 
+<div class="collage_mb" aria-hidden={collageProgress === 0}>
+	<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.001}>
+	<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.80}/>
+	<div class="fig_spacer"></div>
+	<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.5}/>
+	<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.25}/>
+</div>
+
 <div class="collage_dk" aria-hidden={collageProgress === 0}>
-<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.01}>
-<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.40}/>
-<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.15}/>
-<div class="fig_spacer"></div>
-<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.15}/>
-<img src={fig05shirt} class="fig5" alt='' class:hidden={collageProgress < 0.01}/>
+	<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.01}>
+	<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.80}/>
+	<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.3}/>
+	<div class="fig_spacer"></div>
+	<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.3}/>
+	<img src={fig05shirt} class="fig5" alt='' class:hidden={collageProgress < 0.01}/>
 </div>
 
 <style>
@@ -145,17 +153,15 @@
 			transition: opacity 0.8s ease;
 		}
 	}
-
 	.hidden {
 		opacity: 0;
 	}
-
 	main {
 		position: relative;
 	}
 	.pinned_section {
 		/* Scroll distance over which txt1 then txt2 fade out. */
-		height: 300vh;
+		height: 300dvh;
 	}
 	.pinned_inner {
 		position: sticky;
@@ -185,7 +191,7 @@
         color: #cdcdcd;
     }
     .title{
-        color: #a9a9a9;
+		font-family: "CheltenhamDisplay", serif;
         letter-spacing: 30%;
     }
     .poem{
@@ -201,40 +207,103 @@
 	.hold_section {
 		height: 200vh;
 	}
-	.collage_section {
-		height: 400vh;
-	}
      /* MIN */
-	@media (max-width: 768px) {
+	@media (max-width: 800px) {
+		p {
+            font-size: 23px;
+            margin-block-start: 30px;
+            margin-block-end: 30px;
+        }
+		.title {
+			color: #ececec;
+            font-size: 65px;
+        }
+        .title_sm {
+            font-size: 16px;
+            font-family: "CheltenhamBold", serif;
+        }
 		.intro_wr {
 			grid-template-columns: 100%;
 		}
-		/* Only the left panel shows on mobile. */
 		.panel:nth-child(2) {
 			display: none;
 		}
 		.scroll_section {
 			width: 100%;
+			display: grid;
+			justify-content: center;
+			/* margin-left: 50%; */
+			/* transform: translateX(-50%); */
+		}
+		.pinned_section {
+			display: grid;
+			justify-content: center;
 		}
 		.pinned_inner {
 			width: 100%;
 		}
+		.collage_section {
+			height: 300vh;
+		}
+		.collage_dk{
+			display:none;
+		}
+		.collage_mb {
+			width: min(100%, calc(100dvh * 2 / 3));
+			height: auto;
+			aspect-ratio: 2/3;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			display: flex;
+			align-items: flex-start;
+			align-content: flex-start;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+			position: fixed;
+			pointer-events: none;
+			& img {
+				transition: opacity 0.5s ease;
+				display: block;
+			}
+		}
+		.fig1, .fig2, .fig3, .fig5 {
+			width: calc(200% / 7);
+			height: auto;
+		}
+		.fig4{
+			width: calc(500% / 7);
+		}
+		.fig_spacer {
+			height: 10px;
+			width: calc(200% / 7);
+		}
 	}
     /* MAX */
-	@media (min-width: 768px) {
+	@media (min-width: 800px) {
 		p {
             font-size: 31px;
             margin-block-start: 40px;
             margin-block-end: 40px;
         }
-        .title{
+        .title {
+        	color: #a9a9a9;
             font-size: 95px;
-            font-family: "CheltenhamDisplay", serif;
         }
-        .title_sm{
+        .title_sm {
             font-size: 18px;
             font-family: "CheltenhamBold", serif;
         }
+		.scroll_section {
+			width: 100%;
+			padding: 0 4vw 50vh;
+		}
+		.collage_section {
+			height: 300vh;
+		}
+		.collage_mb {
+			display: none;
+		}
 		.collage_dk {
 			height: 100dvh;
 			width: calc((100dvh * 2 / 3) + (100dvh / 6) + 10px);
