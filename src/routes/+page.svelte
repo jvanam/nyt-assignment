@@ -84,7 +84,7 @@
 
 	<!-- Open Graph -->
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="To Fall in Love With the World" />
+	<meta property="og:title" content="Opinion | To Fall in Love With the World" />
 	<meta
 		property="og:description"
 		content="A late summer meditation on time, loss, and solace in the natural world, made from the work of the photographer Mary Manning and the poet Brian Turner."
@@ -93,7 +93,7 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="To Fall in Love With the World" />
+	<meta name="twitter:title" content="Opinion | To Fall in Love With the World" />
 	<meta
 		name="twitter:description"
 		content="A late summer meditation on time, loss, and solace in the natural world, made from the work of the photographer Mary Manning and the poet Brian Turner."
@@ -104,11 +104,11 @@
 <div class="intro_wr" style:opacity={splitOpacity} style:visibility={splitOpacity === 0 ? 'hidden' : 'visible'}>
 	<div class="panel">
 		<img alt="A close-up of a bouquet of flowers" src={intro01} class:hidden={leftSwapped} />
-		<img alt="" src={intro04} class:hidden={!leftSwapped} />
+		<img alt="A person in a field wearing a white dress, with long hair flowing in the wind" src={intro04} class:hidden={!leftSwapped} />
 	</div>
 	<div class="panel">
-		<img alt="A close-up of a bouquet of flowers" src={intro02} class:hidden={rightSwapped} />
-		<img alt="" src={intro03} class:hidden={!rightSwapped} />
+		<img alt="A flower bush, with one flower close up and out of focus" src={intro02} class:hidden={rightSwapped} />
+		<img alt="An empty room lit by moody blue light from a window" src={intro03} class:hidden={!rightSwapped} />
 	</div>
 </div>
 
@@ -153,20 +153,19 @@
 </main>
 
 <div class="collage_mb" aria-hidden={collageProgress === 0}>
-	<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.001}>
-	<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.80}/>
+	<img src={fig03chair} class="fig3" alt='An empty chair' class:hidden={collageProgress < 0.001}>
+	<img src={fig04girl} class="fig4" alt='A person in a sweater sitting down and pointing a camera in the direction of the viewer' class:hidden={collageProgress < 0.80}/>
 	<div class="fig_spacer"></div>
-	<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.5}/>
-	<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.25}/>
+	<img src={fig01table} class="fig1" alt='Two place settings on a table with a blue gingham tablecloth' class:hidden={collageProgress < 0.5}/>
+	<img src={fig02sofa} class="fig2" alt='An empty sofa section in a living room' class:hidden={collageProgress < 0.25}/>
 </div>
 
 <div class="collage_dk" aria-hidden={collageProgress === 0}>
-	<img src={fig03chair} class="fig3" alt='' class:hidden={collageProgress < 0.01}>
-	<img src={fig04girl} class="fig4" alt='' class:hidden={collageProgress < 0.80}/>
-	<img src={fig02sofa} class="fig2" alt='' class:hidden={collageProgress < 0.3}/>
+	<img src={fig03chair} class="fig3" alt='An empty chair' class:hidden={collageProgress < 0.01}>
+	<img src={fig04girl} class="fig4" alt='A person in a sweater sitting down and pointing a camera in the direction of the viewer' class:hidden={collageProgress < 0.80}/>
+	<img src={fig02sofa} class="fig2" alt='An empty sofa section in a living room' class:hidden={collageProgress < 0.3}/>
 	<div class="fig_spacer"></div>
-	<img src={fig01table} class="fig1" alt='' class:hidden={collageProgress < 0.3}/>
-	<img src={fig05shirt} class="fig5" alt='' class:hidden={collageProgress < 0.01}/>
+	<img src={fig01table} class="fig1" alt='Two place settings on a table with a blue gingham tablecloth' class:hidden={collageProgress < 0.3}/>
 </div>
 
 <style>
