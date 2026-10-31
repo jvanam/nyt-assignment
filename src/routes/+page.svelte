@@ -13,11 +13,13 @@
 	/** @type {HTMLElement} */ let textSection;
 	/** @type {HTMLElement} */ let holdSection;
 	/** @type {HTMLElement} */ let collageSection;
+	/** @type {HTMLElement} */ let poemEl;
 
 	let pinnedProgress = $state(0);
 	let textProgress = $state(0);
 	let holdProgress = $state(0);
 	let collageProgress = $state(0);
+	let poemMostlyOff = $state(false);
 
 	const clamp = (/** @type {number} */ n) => Math.min(1, Math.max(0, n));
 
@@ -37,13 +39,23 @@
 		collageProgress = collageSection
 			? clamp((window.innerHeight * .95 - collageSection.getBoundingClientRect().top) / collageSection.offsetHeight)
 			: 0;
+		// Mobile: true once ~90% of the poem has scrolled above the top of the viewport.
+		if (poemEl) {
+			const pr = poemEl.getBoundingClientRect();
+			poemMostlyOff = pr.top + pr.height * 0.9 < 0;
+		}
 	}
 
 	$effect(() => {
 		update();
+		const mq = window.matchMedia('(max-width: 800px)');
+		isMobile = mq.matches;
+		const onMq = () => { isMobile = mq.matches; };
+		mq.addEventListener('change', onMq);
 		window.addEventListener('scroll', update, { passive: true });
 		window.addEventListener('resize', update);
 		return () => {
+			mq.removeEventListener('change', onMq);
 			window.removeEventListener('scroll', update);
 			window.removeEventListener('resize', update);
 		};
@@ -54,7 +66,10 @@
 	let txt2Opacity = $derived(1 - clamp((pinnedProgress - 0.5) / 0.4));
 
 	let rightSwapped = $derived(pinnedProgress >= 0.5);
-	let leftSwapped = $derived(textProgress >= 1);
+	// Desktop swaps when the scroll section is fully scrolled; mobile holds the
+	// first image until most of the poem has left the screen.
+	let isMobile = $state(false);
+	let leftSwapped = $derived(isMobile ? poemMostlyOff : textProgress >= 1);
 	// Split layout fades out across the second half of the hold section.
 	let splitOpacity = $derived(1 - Math.min(1, Math.max(0, (holdProgress - 0.5) * 2)));
 
@@ -89,12 +104,11 @@
 		</div>
 	</section>
 
-	<!-- Remaining text blocks scroll up normally over the left half. -->
 	<section class="scroll_section" bind:this={textSection}>
 		<div class="text_block">
             <p class="title_sm">OPINION</p>
             <p class="title">TO<br/>FALL<br/>IN LOVE<br/>WITH<br/>THE<br/>WORLD</p>
-            <p class="poem">
+            <p class="poem" bind:this={poemEl}>
                 A late summer meditation<br/>
                 on time, loss, and solace in<br/>
                 the natural world, made from<br/>
@@ -132,7 +146,7 @@
 <style>
 	.intro_wr {
 		width: 100%;
-		height: 100dvh;
+		height: 100vh;
 		display: grid;
 		position: fixed;
 		top: 0;
@@ -142,7 +156,7 @@
 	}
 	.panel {
 		position: relative;
-		height: 100dvh;
+		height: 100vh;
 		& img {
 			position: absolute;
 			inset: 0;
@@ -161,7 +175,7 @@
 	}
 	.pinned_section {
 		/* Scroll distance over which txt1 then txt2 fade out. */
-		height: 300dvh;
+		height: 300vh;
 	}
 	.pinned_inner {
 		position: sticky;
@@ -249,7 +263,7 @@
 			display:none;
 		}
 		.collage_mb {
-			width: min(100%, calc(100dvh * 2 / 3));
+			width: min(100%, calc(100vh * 2 / 3));
 			height: auto;
 			aspect-ratio: 2/3;
 			top: 50%;
@@ -305,8 +319,8 @@
 			display: none;
 		}
 		.collage_dk {
-			height: 100dvh;
-			width: calc((100dvh * 2 / 3) + (100dvh / 6) + 10px);
+			height: 100vh;
+			width: calc((100vh * 2 / 3) + (100vh / 6) + 10px);
 			left: 50%;
 			display: flex;
 			flex-wrap: wrap;
@@ -321,14 +335,14 @@
 			}
 		}
 		.fig1, .fig2, .fig3, .fig5 {
-			height: 25dvh
+			height: 25vh
 		}
 		.fig4{
-			height: 75dvh;
+			height: 75vh;
 		}
 		.fig_spacer {
-			height: 25dvh;
-			width: calc(25dvh * 2 / 3);
+			height: 25vh;
+			width: calc(25vh * 2 / 3);
 		}
 	}
 </style>
