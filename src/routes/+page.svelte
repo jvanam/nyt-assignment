@@ -144,6 +144,57 @@
 </div>
 
 <style>
+/* -+-+-+-+-+- TYPOGRAPHY STYLING -+-+-+-+-+- */
+    .title_sm {
+        color: #cdcdcd;
+    }
+    .title {
+		font-family: "CheltenhamDisplay", serif;
+        letter-spacing: 30%;
+    }
+    .poem {
+        color: #EAEAEA;
+    }
+	.scroll_section .text_block {
+		color: inherit;
+	}
+	.text_block {
+		color: var(--color-cream);
+	}
+    /* MIN (type) */
+	@media (max-width: 1000px) {
+		p {
+            font-size: 23px;
+            margin-block-start: 30px;
+            margin-block-end: 30px;
+        }
+		.title {
+			color: #ececec;
+            font-size: 65px;
+        }
+        .title_sm {
+            font-size: 16px;
+            font-family: "CheltenhamBold", serif;
+        }
+	}
+	/* MAX (type) */
+	@media (min-width: 1000px) {
+		p {
+            font-size: 31px;
+            margin-block-start: 40px;
+            margin-block-end: 40px;
+        }
+        .title {
+        	color: #a9a9a9;
+            font-size: 95px;
+        }
+        .title_sm {
+            font-size: 18px;
+            font-family: "CheltenhamBold", serif;
+        }
+	}
+
+/* -+-+-+-+-+- LAYOUT + TRANSITIONS -+-+-+-+-+- */
 	.intro_wr {
 		width: 100%;
 		height: 100vh;
@@ -189,6 +240,9 @@
 	.pinned_inner .text_block {
 		min-height: 0;
 	}
+	.text_block {
+		min-height: 100vh;
+	}
 	.txt1,
 	.txt2 {
 		transition: opacity 0.2s linear;
@@ -201,41 +255,11 @@
 		   txt2 is at 30% opacity (pinnedProgress ≈ 0.78 over 200vh of travel). */
 		margin-top: -44vh;
 	}
-    .title_sm{
-        color: #cdcdcd;
-    }
-    .title{
-		font-family: "CheltenhamDisplay", serif;
-        letter-spacing: 30%;
-    }
-    .poem{
-        color: #EAEAEA;
-    }
-	.scroll_section .text_block {
-		color: inherit;
-	}
-	.text_block {
-		min-height: 100vh;
-		color: var(--color-cream);
-	}
 	.hold_section {
 		height: 200vh;
 	}
-     /* MIN */
+	/* MIN (layout) */
 	@media (max-width: 800px) {
-		p {
-            font-size: 23px;
-            margin-block-start: 30px;
-            margin-block-end: 30px;
-        }
-		.title {
-			color: #ececec;
-            font-size: 65px;
-        }
-        .title_sm {
-            font-size: 16px;
-            font-family: "CheltenhamBold", serif;
-        }
 		.intro_wr {
 			grid-template-columns: 100%;
 		}
@@ -260,7 +284,7 @@
 			height: 300vh;
 		}
 		.collage_dk{
-			display:none;
+			display: none;
 		}
 		.collage_mb {
 			width: min(100%, calc(100vh * 2 / 3));
@@ -293,21 +317,8 @@
 			width: calc(200% / 7);
 		}
 	}
-    /* MAX */
+	/* MAX (layout) */
 	@media (min-width: 800px) {
-		p {
-            font-size: 31px;
-            margin-block-start: 40px;
-            margin-block-end: 40px;
-        }
-        .title {
-        	color: #a9a9a9;
-            font-size: 95px;
-        }
-        .title_sm {
-            font-size: 18px;
-            font-family: "CheltenhamBold", serif;
-        }
 		.scroll_section {
 			width: 100%;
 			padding: 0 4vw 50vh;
@@ -327,7 +338,6 @@
 			transform: translateX(-50%);
 			top: 0px;
 			position: fixed;
-			/* inset: 0; */
 			pointer-events: none;
 			& img {
 				transition: opacity 0.5s ease;
@@ -337,7 +347,7 @@
 		.fig1, .fig2, .fig3, .fig5 {
 			height: 25vh
 		}
-		.fig4{
+		.fig4 {
 			height: 75vh;
 		}
 		.fig_spacer {
