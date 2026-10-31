@@ -75,6 +75,32 @@
 
 </script>
 
+<svelte:head>
+	<title>Opinion | To Fall in Love With the World</title>
+	<meta
+		name="description"
+		content="A late summer meditation on time, loss, and solace in the natural world, made from the work of the photographer Mary Manning and the poet Brian Turner."
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="To Fall in Love With the World" />
+	<meta
+		property="og:description"
+		content="A late summer meditation on time, loss, and solace in the natural world, made from the work of the photographer Mary Manning and the poet Brian Turner."
+	/>
+	<meta property="og:image" content="/og-image.jpg" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="To Fall in Love With the World" />
+	<meta
+		name="twitter:description"
+		content="A late summer meditation on time, loss, and solace in the natural world, made from the work of the photographer Mary Manning and the poet Brian Turner."
+	/>
+	<meta name="twitter:image" content="/og-image.jpg" />
+</svelte:head>
+
 <div class="intro_wr" style:opacity={splitOpacity} style:visibility={splitOpacity === 0 ? 'hidden' : 'visible'}>
 	<div class="panel">
 		<img alt="A close-up of a bouquet of flowers" src={intro01} class:hidden={leftSwapped} />
